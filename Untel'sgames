@@ -1,133 +1,129 @@
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
-local targetGameId = 5470087938
-
-if game.PlaceId == targetGameId then
-    local function createUI()
-        if playerGui:FindFirstChild("UnterConvenienceUI") then
-            playerGui:FindFirstChild("UnterConvenienceUI"):Destroy()
-        end
-
-        local screenGui = Instance.new("ScreenGui")
-        screenGui.Name = "UnterConvenienceUI"
-        screenGui.Parent = playerGui
-
-        local openButton = Instance.new("TextButton")
-        openButton.Parent = screenGui
-        openButton.Size = UDim2.new(0, 100, 0, 30)
-        openButton.Position = UDim2.new(1, -100, 0, 0)
-        openButton.Text = "운테르 편의 스크립트 🤑🤑🤑"
-        openButton.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
-        openButton.TextScaled = true
-        openButton.Font = Enum.Font.Gotham
-        openButton.BorderSizePixel = 0
-
-        local buttonCorner = Instance.new("UICorner")
-        buttonCorner.CornerRadius = UDim.new(0, 12)
-        buttonCorner.Parent = openButton
-
-        local menuFrame = Instance.new("Frame")
-        menuFrame.Parent = screenGui
-        menuFrame.Size = UDim2.new(0, 300 * 0.75, 0, 400 * 0.75)
-        menuFrame.Position = UDim2.new(0.5, -150 * 0.75, 0.5, -200 * 0.75)
-        menuFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-        menuFrame.BackgroundTransparency = 0.5
-        menuFrame.Visible = false
-        menuFrame.BorderSizePixel = 0
-
-        local menuCorner = Instance.new("UICorner")
-        menuCorner.CornerRadius = UDim.new(0, 15)
-        menuCorner.Parent = menuFrame
-
-        local scrollFrame = Instance.new("ScrollingFrame")
-        scrollFrame.Parent = menuFrame
-        scrollFrame.Size = UDim2.new(1, -20, 1, -20)
-        scrollFrame.Position = UDim2.new(0, 10, 0, 10)
-        scrollFrame.BackgroundTransparency = 1
-        scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 600)
-        scrollFrame.ScrollBarThickness = 8
-
-        local buttons = {
-            {Text = "온천 가기", Color = Color3.fromRGB(255, 255, 0), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                local teleportPosition = workspace:FindFirstChild("Island") and workspace.Island:FindFirstChild("Location")
-                if teleportPosition then
-                    character:WaitForChild("HumanoidRootPart").CFrame = teleportPosition.CFrame
-                end
-            end},
-            {Text = "감옥가기", Color = Color3.fromRGB(255, 0, 0), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                local prisonLocation = workspace["\234\176\144\236\152\165"].Model.DDDD24
-                if prisonLocation then
-                    character:WaitForChild("HumanoidRootPart").CFrame = prisonLocation.CFrame
-                end
-            end},
-            {Text = "자동차 스폰", Color = Color3.fromRGB(0, 255, 255), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                local carLocation = workspace.Armory.Garage:GetChildren()[5]
-                if carLocation then
-                    character:WaitForChild("HumanoidRootPart").CFrame = carLocation.CFrame
-                end
-            end},
-            {Text = "흔들흔들", Color = Color3.fromRGB(255, 105, 180), Callback = function()
-                loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-jerk-off-25958"))()
-            end},
-            {Text = "BANG(by Doodle)", Color = Color3.fromRGB(128, 0, 128), Callback = function()
-                loadstring(game:HttpGet("https://pastebin.com/raw/Vq60WHpk"))()
-            end},
-            {Text = "눕기", Color = Color3.fromRGB(255, 140, 0), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                local humanoid = character:FindFirstChildOfClass("Humanoid")
-                if humanoid then
-                    humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-                end
-            end},
-            {Text = "랜덤고투", Color = Color3.fromRGB(0, 255, 0), Callback = function()
-                local players = game.Players:GetPlayers()
-                if #players > 1 then
-                    local randomPlayer
-                    repeat
-                        randomPlayer = players[math.random(1, #players)]
-                    until randomPlayer ~= player
-
-                    if randomPlayer and randomPlayer.Character and randomPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                        local character = player.Character or player.CharacterAdded:Wait()
-                        character:WaitForChild("HumanoidRootPart").CFrame = randomPlayer.Character.HumanoidRootPart.CFrame
-                    end
-                end
-            end},
-            {Text = "Y좌표 500으로 TP", Color = Color3.fromRGB(0, 0, 255), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                if character and character:FindFirstChild("HumanoidRootPart") then
-                    character.HumanoidRootPart.CFrame = CFrame.new(character.HumanoidRootPart.Position.X, 500, character.HumanoidRootPart.Position.Z)
-                end
-            end},
-        }
-
-        for i, buttonData in ipairs(buttons) do
-            local button = Instance.new("TextButton")
-            button.Parent = scrollFrame
-            button.Size = UDim2.new(1, -20, 0, 40)
-            button.Position = UDim2.new(0, 0, 0, (i-1) * 50)
-            button.Text = buttonData.Text
-            button.BackgroundColor3 = buttonData.Color
-            button.TextScaled = true
-            button.Font = Enum.Font.Gotham
-            button.BorderSizePixel = 0
-
-            button.MouseButton1Click:Connect(buttonData.Callback)
-        end
-
-        openButton.MouseButton1Click:Connect(function()
-            menuFrame.Visible = not menuFrame.Visible
-        end)
+local function createUI()
+    if playerGui:FindFirstChild("UnterConvenienceUI") then
+        playerGui:FindFirstChild("UnterConvenienceUI"):Destroy()
     end
 
-    createUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "UnterConvenienceUI"
+    screenGui.Parent = playerGui
 
-    player.CharacterAdded:Connect(function()
-        wait(1)
-        createUI()
+    local openButton = Instance.new("TextButton")
+    openButton.Parent = screenGui
+    openButton.Size = UDim2.new(0, 100, 0, 30)
+    openButton.Position = UDim2.new(1, -100, 0, 0)
+    openButton.Text = "운테르 편의 스크립트 🤑🤑🤑"
+    openButton.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
+    openButton.TextScaled = true
+    openButton.Font = Enum.Font.Gotham
+    openButton.BorderSizePixel = 0
+
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 12)
+    buttonCorner.Parent = openButton
+
+    local menuFrame = Instance.new("Frame")
+    menuFrame.Parent = screenGui
+    menuFrame.Size = UDim2.new(0, 300 * 0.75, 0, 400 * 0.75)
+    menuFrame.Position = UDim2.new(0.5, -150 * 0.75, 0.5, -200 * 0.75)
+    menuFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    menuFrame.BackgroundTransparency = 0.5
+    menuFrame.Visible = false
+    menuFrame.BorderSizePixel = 0
+
+    local menuCorner = Instance.new("UICorner")
+    menuCorner.CornerRadius = UDim.new(0, 15)
+    menuCorner.Parent = menuFrame
+
+    local scrollFrame = Instance.new("ScrollingFrame")
+    scrollFrame.Parent = menuFrame
+    scrollFrame.Size = UDim2.new(1, -20, 1, -20)
+    scrollFrame.Position = UDim2.new(0, 10, 0, 10)
+    scrollFrame.BackgroundTransparency = 1
+    scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 600)
+    scrollFrame.ScrollBarThickness = 8
+
+    local buttons = {
+        {Text = "온천 가기", Color = Color3.fromRGB(255, 255, 0), Callback = function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local teleportPosition = workspace:FindFirstChild("Island") and workspace.Island:FindFirstChild("Location")
+            if teleportPosition then
+                character:WaitForChild("HumanoidRootPart").CFrame = teleportPosition.CFrame
+            end
+        end},
+        {Text = "감옥가기", Color = Color3.fromRGB(255, 0, 0), Callback = function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local prisonLocation = workspace["\234\176\144\236\152\165"].Model.DDDD24
+            if prisonLocation then
+                character:WaitForChild("HumanoidRootPart").CFrame = prisonLocation.CFrame
+            end
+        end},
+        {Text = "자동차 스폰", Color = Color3.fromRGB(0, 255, 255), Callback = function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local carLocation = workspace.Armory.Garage:GetChildren()[5]
+            if carLocation then
+                character:WaitForChild("HumanoidRootPart").CFrame = carLocation.CFrame
+            end
+        end},
+        {Text = "흔들흔들", Color = Color3.fromRGB(255, 105, 180), Callback = function()
+            loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-jerk-off-25958"))()
+        end},
+        {Text = "BANG(by Doodle)", Color = Color3.fromRGB(128, 0, 128), Callback = function()
+            loadstring(game:HttpGet("https://pastebin.com/raw/Vq60WHpk"))()
+        end},
+        {Text = "눕기", Color = Color3.fromRGB(255, 140, 0), Callback = function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+            end
+        end},
+        {Text = "랜덤고투", Color = Color3.fromRGB(0, 255, 0), Callback = function()
+            local players = game.Players:GetPlayers()
+            if #players > 1 then
+                local randomPlayer
+                repeat
+                    randomPlayer = players[math.random(1, #players)]
+                until randomPlayer ~= player
+
+                if randomPlayer and randomPlayer.Character and randomPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local character = player.Character or player.CharacterAdded:Wait()
+                    character:WaitForChild("HumanoidRootPart").CFrame = randomPlayer.Character.HumanoidRootPart.CFrame
+                end
+            end
+        end},
+        {Text = "Y좌표 500으로 TP", Color = Color3.fromRGB(0, 0, 255), Callback = function()
+            local character = player.Character or player.CharacterAdded:Wait()
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                character.HumanoidRootPart.CFrame = CFrame.new(character.HumanoidRootPart.Position.X, 500, character.HumanoidRootPart.Position.Z)
+            end
+        end},
+    }
+
+    for i, buttonData in ipairs(buttons) do
+        local button = Instance.new("TextButton")
+        button.Parent = scrollFrame
+        button.Size = UDim2.new(1, -20, 0, 40)
+        button.Position = UDim2.new(0, 0, 0, (i-1) * 50)
+        button.Text = buttonData.Text
+        button.BackgroundColor3 = buttonData.Color
+        button.TextScaled = true
+        button.Font = Enum.Font.Gotham
+        button.BorderSizePixel = 0
+
+        button.MouseButton1Click:Connect(buttonData.Callback)
+    end
+
+    openButton.MouseButton1Click:Connect(function()
+        menuFrame.Visible = not menuFrame.Visible
     end)
 end
+
+createUI()
+
+player.CharacterAdded:Connect(function()
+    wait(1)
+    createUI()
+end)
