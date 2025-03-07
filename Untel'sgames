@@ -17,7 +17,7 @@ if game.PlaceId == targetGameId then
         openButton.Parent = screenGui
         openButton.Size = UDim2.new(0, 100, 0, 30)
         openButton.Position = UDim2.new(1, -100, 0, 0)
-        openButton.Text = "운테르 편의 스크립트"
+        openButton.Text = "운테르 편의 스크립트 🤑🤑🤑"
         openButton.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
         openButton.TextScaled = true
         openButton.Font = Enum.Font.Gotham
@@ -76,35 +76,11 @@ if game.PlaceId == targetGameId then
             {Text = "BANG(by Doodle)", Color = Color3.fromRGB(128, 0, 128), Callback = function()
                 loadstring(game:HttpGet("https://pastebin.com/raw/Vq60WHpk"))()
             end},
-            {Text = "누워서 걷기(on off 불가)", Color = Color3.fromRGB(255, 140, 0), Callback = function()
+            {Text = "눕기", Color = Color3.fromRGB(255, 140, 0), Callback = function()
                 local character = player.Character or player.CharacterAdded:Wait()
                 local humanoid = character:FindFirstChildOfClass("Humanoid")
                 if humanoid then
                     humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-                end
-            end},
-            {Text = "떨어지기", Color = Color3.fromRGB(255, 0, 255), Callback = function()
-                local character = player.Character or player.CharacterAdded:Wait()
-                if character then
-                    local humanoid = character:FindFirstChildOfClass("Humanoid")
-                    if humanoid then
-                        humanoid:ChangeState(Enum.HumanoidStateType.Physics)
-                    end
-                    character:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(0, -500, 0)
-                end
-            end},
-        }
-            {Text = "눕기", Color = Color3.fromRGB(255, 165, 0), Position = UDim2.new(0, 25, 0, 250), Callback = function()
-                local humanoid = player.Character:FindFirstChildWhichIsA("Humanoid")
-                if humanoid then
-                    humanoid.Sit = true
-                    task.wait(0.1)
-                    humanoid.RootPart.CFrame = humanoid.RootPart.CFrame * CFrame.Angles(math.pi * 0.5, 0, 0)
-                    for _, v in ipairs(humanoid:GetPlayingAnimationTracks()) do
-                        v:Stop()
-                    end
-                else
-                    warn("Humanoid를 찾을 수 없습니다.")
                 end
             end},
             {Text = "랜덤고투", Color = Color3.fromRGB(0, 255, 0), Callback = function()
@@ -119,6 +95,12 @@ if game.PlaceId == targetGameId then
                         local character = player.Character or player.CharacterAdded:Wait()
                         character:WaitForChild("HumanoidRootPart").CFrame = randomPlayer.Character.HumanoidRootPart.CFrame
                     end
+                end
+            end},
+            {Text = "Y좌표 500으로 TP", Color = Color3.fromRGB(0, 0, 255), Callback = function()
+                local character = player.Character or player.CharacterAdded:Wait()
+                if character and character:FindFirstChild("HumanoidRootPart") then
+                    character.HumanoidRootPart.CFrame = CFrame.new(character.HumanoidRootPart.Position.X, 500, character.HumanoidRootPart.Position.Z)
                 end
             end},
         }
